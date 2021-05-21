@@ -4,7 +4,7 @@ let context;
 let secondsPassed;
 let oldTimeStamp;
 let fps;
-
+let blobs = [];
 // Listen to the onLoad event
 window.onload = init;
 
@@ -17,7 +17,7 @@ function init() {
     context.fillStyle = "#000000";
     context.fillRect(0, 0, canvas.width, canvas.height);
 
-    let blob = new Blob({speed: {x: 200, y: 200}, context})
+    blobs.push(new Blob({speed: {x: 1, y: -1}, position: {x: 500, y: 500}, context}))
     // Request an animation frame for the first time
     // The gameLoop() function will be called as a callback of this request
     window.requestAnimationFrame(gameLoop);
@@ -33,6 +33,9 @@ function gameLoop(timeStamp) {
     // Calculate fps
     fps = Math.round(1 / secondsPassed);
 
+    context.fillStyle = "black";
+    context.fillRect(0, 0, canvas.width, canvas.height);
+
     // Draw number to the screen
     context.fillStyle = 'black';
     context.fillRect(0, 0, 200, 100);
@@ -40,20 +43,19 @@ function gameLoop(timeStamp) {
     context.fillStyle = 'white';
     context.fillText("FPS: " + fps, 10, 30);
 
-    // Perform the drawing operation
-    // draw({objects: blobs});
 
-    // The loop function has reached it's end
-    // Keep requesting new frames
+
+    update()
+    render();
+
     window.requestAnimationFrame(gameLoop);
 }
 
-function draw(args) {
-    let objects = args.objects
-    objects.forEach(obj => obj.render())
-    // Get a random color, red or blue
-    context.fillStyle = Math.random() > 0.5 ? '#ff8080' : '#0099b0';
+function render() {
+    blobs.forEach(blob => blob.render())
+}
 
-    // Draw a rectangle on the canvas
-    context.fillRect(250, 50, 200, 175);
+
+function update() {
+    blobs.forEach(blob => blob.update())
 }
