@@ -1,4 +1,5 @@
 import Blob from "./blob.js"
+
 let canvas;
 let context;
 let secondsPassed;
@@ -16,22 +17,38 @@ function init() {
     context = canvas.getContext('2d');
     context.fillStyle = "#000000";
     context.fillRect(0, 0, canvas.width, canvas.height);
-    for (let i = 0; i < 50; i++){
+    for (let i = 0; i < 50; i++) {
         // let sign =
         let x = Math.random(1) * (Math.random() < 0.5 ? -1 : 1)
-        let y = Math.sqrt(1-x*x) * (Math.random() < 0.5 ? -1 : 1)
-        blobs.push(new Blob({speed: {x: x, y: y}, position: {x: 500, y: 500}, color: "#540101"}))
+        let y = Math.sqrt(1 - x * x) * (Math.random() < 0.5 ? -1 : 1)
+        let blobParams = {
+            speed: {x: x, y: y},
+            position: {x: 10, y: 10},
+            color: "#540101",
+            size: 30
+        }
+        blobs.push(new Blob(blobParams))
     }
-    for (let i = 0; i < 50; i++){
+    for (let i = 0; i < 50; i++) {
         let x = Math.random(1) * (Math.random() < 0.5 ? -1 : 1)
-        let y = Math.sqrt(1-x*x) * (Math.random() < 0.5 ? -1 : 1)
-        blobs.push(new Blob({speed: {x: x, y: y}, position: {x: 750, y: 720}, color: "#01450b"}))
+        let y = Math.sqrt(1 - x * x) * (Math.random() < 0.5 ? -1 : 1)
+        blobs.push(new Blob({speed: {x: x, y: y}, position: {x: canvas.width - 10, y: 10}, color: "#01450b"}))
     }
 
-    for (let i = 0; i < 50; i++){
+    for (let i = 0; i < 50; i++) {
         let x = Math.random(1) * (Math.random() < 0.5 ? -1 : 1)
-        let y = Math.sqrt(1-x*x) * (Math.random() < 0.5 ? -1 : 1)
-        blobs.push(new Blob({speed: {x: x, y: y}, position: {x: 1000, y: 500}, color: "#021bd6"}))
+        let y = Math.sqrt(1 - x * x) * (Math.random() < 0.5 ? -1 : 1)
+        blobs.push(new Blob({speed: {x: x, y: y}, position: {x: 10, y: canvas.height - 10}, color: "#021bd6"}))
+    }
+
+    for (let i = 0; i < 50; i++) {
+        let x = Math.random(1) * (Math.random() < 0.5 ? -1 : 1)
+        let y = Math.sqrt(1 - x * x) * (Math.random() < 0.5 ? -1 : 1)
+        blobs.push(new Blob({
+            speed: {x: x, y: y},
+            position: {x: canvas.width - 10, y: canvas.height - 10},
+            color: "#4f0154"
+        }))
     }
 
     window.requestAnimationFrame(gameLoop);
@@ -53,7 +70,6 @@ function gameLoop(timeStamp) {
     context.font = '25px Arial';
     context.fillStyle = 'white';
     context.fillText("FPS: " + fps, 10, 30);
-
 
 
     update()
