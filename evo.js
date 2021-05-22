@@ -5,10 +5,10 @@ let secondsPassed;
 let oldTimeStamp;
 let fps;
 let blobs = [];
+
 // Listen to the onLoad event
 window.onload = init;
 
-// Trigger init function when the page has loaded
 function init() {
     canvas = document.getElementById('canvas');
     canvas.width = window.innerWidth;
@@ -16,20 +16,31 @@ function init() {
     context = canvas.getContext('2d');
     context.fillStyle = "#000000";
     context.fillRect(0, 0, canvas.width, canvas.height);
+    for (let i = 0; i < 50; i++){
+        // let sign =
+        let x = Math.random(1) * (Math.random() < 0.5 ? -1 : 1)
+        let y = Math.sqrt(1-x*x) * (Math.random() < 0.5 ? -1 : 1)
+        blobs.push(new Blob({speed: {x: x, y: y}, position: {x: 500, y: 500}, color: "#540101"}))
+    }
+    for (let i = 0; i < 50; i++){
+        let x = Math.random(1) * (Math.random() < 0.5 ? -1 : 1)
+        let y = Math.sqrt(1-x*x) * (Math.random() < 0.5 ? -1 : 1)
+        blobs.push(new Blob({speed: {x: x, y: y}, position: {x: 750, y: 720}, color: "#01450b"}))
+    }
 
-    blobs.push(new Blob({speed: {x: 1, y: -1}, position: {x: 500, y: 500}, context}))
-    // Request an animation frame for the first time
-    // The gameLoop() function will be called as a callback of this request
+    for (let i = 0; i < 50; i++){
+        let x = Math.random(1) * (Math.random() < 0.5 ? -1 : 1)
+        let y = Math.sqrt(1-x*x) * (Math.random() < 0.5 ? -1 : 1)
+        blobs.push(new Blob({speed: {x: x, y: y}, position: {x: 1000, y: 500}, color: "#021bd6"}))
+    }
+
     window.requestAnimationFrame(gameLoop);
 }
 
 function gameLoop(timeStamp) {
-    // let blobs = args.blobs
-    // let timeStamp = args.timeStamp
     // Calculate the number of seconds passed since the last frame
     secondsPassed = (timeStamp - oldTimeStamp) / 1000;
     oldTimeStamp = timeStamp;
-
     // Calculate fps
     fps = Math.round(1 / secondsPassed);
 
@@ -52,6 +63,7 @@ function gameLoop(timeStamp) {
 }
 
 function render() {
+
     blobs.forEach(blob => blob.render())
 }
 
