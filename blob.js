@@ -4,10 +4,10 @@ class Blob {
         this.ctx = this.canvas.getContext('2d');
         this.position = args.position
         this.size = args.size ? args.size: 20
+        this.pulseInterval = args.pulseInterval ? args.pulseInterval: 1000
         this.speed = args.speed
         this.color = args.color
         this.birthTime = Date.now()
-        this.pulseInterval = 1000
     }
 
     render() {

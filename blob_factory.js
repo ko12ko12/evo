@@ -1,4 +1,5 @@
 // class BlobFactory{
 //     constructor(tribe) {
+
 //     }
 // }
