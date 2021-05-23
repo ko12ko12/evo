@@ -1,4 +1,6 @@
 import Blob from "./blob.js"
+import BlobFactory from "./blob_factory.js";
+import blobFactory from "./blob_factory.js"
 
 let canvas;
 let context;
@@ -17,38 +19,13 @@ function init() {
     context = canvas.getContext('2d');
     context.fillStyle = "#000000";
     context.fillRect(0, 0, canvas.width, canvas.height);
+    let blobFactory = new BlobFactory()
     for (let i = 0; i < 50; i++) {
-        // let sign =
-        let x = Math.random(1) * (Math.random() < 0.5 ? -1 : 1)
-        let y = Math.sqrt(1 - x * x) * (Math.random() < 0.5 ? -1 : 1)
-        let blobParams = {
-            speed: {x: x, y: y},
-            position: {x: 10, y: 10},
-            color: "#540101",
-            size: 30
-        }
-        blobs.push(new Blob(blobParams))
-    }
-    for (let i = 0; i < 50; i++) {
-        let x = Math.random(1) * (Math.random() < 0.5 ? -1 : 1)
-        let y = Math.sqrt(1 - x * x) * (Math.random() < 0.5 ? -1 : 1)
-        blobs.push(new Blob({speed: {x: x, y: y}, position: {x: canvas.width - 10, y: 10}, color: "#01450b"}))
-    }
-
-    for (let i = 0; i < 50; i++) {
-        let x = Math.random(1) * (Math.random() < 0.5 ? -1 : 1)
-        let y = Math.sqrt(1 - x * x) * (Math.random() < 0.5 ? -1 : 1)
-        blobs.push(new Blob({speed: {x: x, y: y}, position: {x: 10, y: canvas.height - 10}, color: "#021bd6"}))
-    }
-
-    for (let i = 0; i < 50; i++) {
-        let x = Math.random(1) * (Math.random() < 0.5 ? -1 : 1)
-        let y = Math.sqrt(1 - x * x) * (Math.random() < 0.5 ? -1 : 1)
-        blobs.push(new Blob({
-            speed: {x: x, y: y},
-            position: {x: canvas.width - 10, y: canvas.height - 10},
-            color: "#4f0154"
-        }))
+        blobs.push(blobFactory.generateBlob("red"))
+        blobs.push(blobFactory.generateBlob("green"))
+        // blobs.push(blobFactory.generateBlob("blue"))
+        // blobs.push(blobFactory.generateBlob("purple"))
+        // blobs.push(blobFactory.generateBlob("white"))
     }
 
     window.requestAnimationFrame(gameLoop);

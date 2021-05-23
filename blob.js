@@ -2,6 +2,7 @@ class Blob {
     constructor(args) {
         this.canvas = document.getElementById('canvas');
         this.ctx = this.canvas.getContext('2d');
+        this.tribe = args.tribe
         this.position = args.position
         this.size = args.size ? args.size: 20
         this.pulseInterval = args.pulseInterval ? args.pulseInterval: 1000
