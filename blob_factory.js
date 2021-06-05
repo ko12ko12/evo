@@ -15,7 +15,6 @@ class BlobFactory{
         }
     }
     generateBlob(tribe){
-        console.log(this.canvas)
         return this[this.blobGenerators[tribe]]()
     } 
 
@@ -28,7 +27,8 @@ class BlobFactory{
             speed: {x:x*speed, y: y*speed},
             position: {x: 10, y: 10},
             color: "#540101",
-            size: 50}
+            radius: 50,
+            tribe}
         return new Blob(blobParams)
     }
 
@@ -37,12 +37,11 @@ class BlobFactory{
         let speed = 3
         let x = Math.random(1) * (Math.random() < 0.5 ? -1 : 1)
         let y = Math.sqrt(1 - x * x) * (Math.random() < 0.5 ? -1 : 1)
-        console.log(this.canvas)
         let blobParams = {
             speed: {x:x*speed, y: y*speed},
             position: {x: this.canvas.width - 10, y: 10},
             color: "#01450b",
-            size: 20}
+            radius: 20, tribe}
         return new Blob(blobParams)
     }
 
@@ -55,7 +54,7 @@ class BlobFactory{
             speed: {x:x*speed, y: y*speed},
             position: {x: 10, y: this.canvas.height - 10},
             color: "#021bd6",
-            size: 20}
+            radius: 20, tribe}
         return new Blob(blobParams)
     }
 
@@ -68,7 +67,7 @@ class BlobFactory{
             speed: {x:x*speed, y: y*speed},
             position: {x: this.canvas.width - 10, y: this.canvas.height - 10},
             color: "#4f0154",
-            size: 20}
+            radius: 20, tribe}
         return new Blob(blobParams)
     }
 
@@ -81,7 +80,7 @@ class BlobFactory{
             speed: {x:x*speed, y: y*speed},
             position: {x: this.canvas.width/2, y: this.canvas.height/2},
             color: "yellow",
-            size: 3 }
+            radius: 3, tribe}
         return new Blob(blobParams)
     }
     

@@ -4,7 +4,7 @@ class Blob {
         this.ctx = this.canvas.getContext('2d');
         this.tribe = args.tribe
         this.position = args.position
-        this.size = args.size ? args.size: 20
+        this.radius = args.radius ? args.radius: 20
         this.pulseInterval = args.pulseInterval ? args.pulseInterval: 1000
         this.speed = args.speed
         this.color = args.color
@@ -14,13 +14,13 @@ class Blob {
     render() {
         this.ctx.beginPath();
         let innerRadius = 2,
-            outerRadius = this.size
+            outerRadius = this.radius
         let gradient = this.ctx.createRadialGradient(this.position.x, this.position.y,
             innerRadius, this.position.x, this.position.y, outerRadius);
         gradient.addColorStop(0, 'white');
         gradient.addColorStop(this.pulseState, this.color);
         gradient.addColorStop(1, '#00000000')
-        this.ctx.arc(this.position.x, this.position.y, this.size, 0, 2 * Math.PI);
+        this.ctx.arc(this.position.x, this.position.y, this.radius, 0, 2 * Math.PI);
         this.ctx.fillStyle = gradient;
         this.ctx.fill()
         this.ctx.closePath();

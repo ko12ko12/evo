@@ -1,8 +1,9 @@
 import Blob from "./blob.js"
 import BlobFactory from "./blob_factory.js";
 import blobFactory from "./blob_factory.js"
+import CollisionManager from "./naive_collision_manager.js";
 
-let canvas;
+let canvas, collisions;
 let context;
 let secondsPassed;
 let oldTimeStamp;
@@ -19,6 +20,7 @@ function init() {
     context = canvas.getContext('2d');
     context.fillStyle = "#000000";
     context.fillRect(0, 0, canvas.width, canvas.height);
+    collisions = new CollisionManager()
     let blobFactory = new BlobFactory()
     for (let i = 0; i < 50; i++) {
         blobs.push(blobFactory.generateBlob("red"))
@@ -27,7 +29,7 @@ function init() {
         // blobs.push(blobFactory.generateBlob("purple"))
         // blobs.push(blobFactory.generateBlob("white"))
     }
-
+    collisions.addCollidables(blobs)
     window.requestAnimationFrame(gameLoop);
 }
 
@@ -63,4 +65,5 @@ function render() {
 
 function update() {
     blobs.forEach(blob => blob.update())
+    collisions.detectCollisions()
 }
