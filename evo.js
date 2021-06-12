@@ -24,11 +24,14 @@ function init() {
     let blobFactory = new BlobFactory()
     for (let i = 0; i < 50; i++) {
         blobs.push(blobFactory.generateBlob("red"))
-        blobs.push(blobFactory.generateBlob("green"))
+        // blobs.push(blobFactory.generateBlob("green"))
         // blobs.push(blobFactory.generateBlob("blue"))
         // blobs.push(blobFactory.generateBlob("purple"))
         // blobs.push(blobFactory.generateBlob("white"))
     }
+    for (let i = 0; i < 10; i++) 
+        blobs.push(blobFactory.generateBlob("green"))
+
     collisions.addCollidables(blobs)
     window.requestAnimationFrame(gameLoop);
 }
@@ -58,13 +61,13 @@ function gameLoop(timeStamp) {
 }
 
 function render() {
-
     blobs.forEach(blob => blob.render())
 }
 
 
 function update() {
-    blobs.forEach(blob => blob.update())
+    
     collisions.detectCollisions()
     collisions.checkFieldsOfVision()
+    blobs.forEach(blob => blob.update())
 }

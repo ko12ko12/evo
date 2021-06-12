@@ -35,7 +35,7 @@ class BlobFactory{
 
     generateGreenBlob(){
         const tribe = "green"
-        const visionRadius = 100
+        const visionRadius = 50
         const speed = 3
         const x = Math.random(1) * (Math.random() < 0.5 ? -1 : 1)
         const y = Math.sqrt(1 - x * x) * (Math.random() < 0.5 ? -1 : 1)
