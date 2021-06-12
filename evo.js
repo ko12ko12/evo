@@ -66,4 +66,5 @@ function render() {
 function update() {
     blobs.forEach(blob => blob.update())
     collisions.detectCollisions()
+    collisions.checkFieldsOfVision()
 }

@@ -9,14 +9,40 @@ class CollisionManager {
         this.calcCollideablePairs()
     }
 
+    checkFieldsOfVision() {
+        this.collideablePairs.forEach(pair => {
+            if (this.distanceSquared(pair) <= (pair[0].visionRadius + pair[1].radius)*(pair[0].visionRadius + pair[1].radius)){
+                let relativeDirection = {}
+                let relativeNormal = {}
+                let sign = {}
+                if (pair[0].radius > pair[1].radius){
+                    console.log("should pursue")
+                    relativeDirection = {x: pair[0].position.x - pair[1].position.x, y: pair[0].position.y - pair[1].position.y}
+                    sign.x = relativeDirection.x < 0 ? 1 : -1
+                    sign.y = relativeDirection.y < 0 ? 1 : -1
+                    let magnitudeDenominator = relativeDirection.x * relativeDirection.x + relativeDirection.y * relativeDirection.y
+                    relativeNormal.x = relativeDirection.x * relativeDirection.x / magnitudeDenominator * sign.x
+                    relativeNormal.y = relativeDirection.y * relativeDirection.y / magnitudeDenominator * sign.y
+                    pair[0].speed.x = relativeNormal.x * pair[0].speed.magnitude
+                    pair[0].speed.y = relativeNormal.y * pair[0].speed.magnitude
+                    pair[1].speed.x = relativeNormal.x * pair[0].speed.magnitude
+                    pair[1].speed.x = relativeNormal.x * pair[0].speed.magnitude
+                }
+                else if (pair[0].radius < pair[1].radius){
+                }
+            }
+        })
+    }
+
+
+
     detectCollisions() {
         this.collideablePairs.forEach(pair => {
             if (this.distanceSquared(pair) < (pair[0].radius + pair[1].radius)*(pair[0].radius + pair[1].radius)){
-                console.log("collision")
-                if (pair[0].radius >= pair[1].radius)
-                    pair[1].color = pair[0].color
-                else
-                    pair[0].color = pair[1].color
+                // if (pair[0].radius >= pair[1].radius)
+                    // pair[1].color = pair[0].color
+                // else
+                    // pair[0].color = pair[1].color
             }
         })
     }
@@ -34,10 +60,7 @@ class CollisionManager {
         const l = this.collideables.length;
         for (let i = 0; i < l; ++i)
             for (let j = i + 1; j < l; ++j){
-                //console.log(this.collideables[i])
-                //console.log(this.collideables[j])
                 pairs.push([this.collideables[i], this.collideables[j]])}
-        // console.log(pairs)
         this.collideablePairs =  pairs.filter(pair => pair[0].tribe != pair[1].tribe);
     }
 }

@@ -8,6 +8,7 @@ class Blob {
         this.pulseInterval = args.pulseInterval ? args.pulseInterval: 1000
         this.speed = args.speed
         this.color = args.color
+        this.visionRadius = args.visionRadius
         this.birthTime = Date.now()
     }
 
